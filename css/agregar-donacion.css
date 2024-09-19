@@ -1,0 +1,143 @@
+:root {
+    --color-borde: #000000;
+  }
+
+
+.container {
+    border: 1px solid var(--color-borde);
+    height: 50%;
+    max-width: 750px;
+    margin: 2% auto;
+    padding: 2rem;
+    padding-top: .5rem;
+    background-color: #ffffff;
+  }
+
+#titulo-principal {
+    text-align: center;
+    font-size: 40px;
+  }
+
+.titulo {
+    text-align: center;
+    font-size: x-large;
+  }
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+
+.opciones-menu {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; 
+    gap: 1rem;
+  }
+
+label {
+    padding-bottom: 1rem;
+    cursor: pointer;
+  }
+
+#publicar-donacion {
+    background-color: #4bb4f8;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    padding: 2% 5%;
+    width: 716px;
+    cursor: pointer;
+  }
+  
+#publicar-donacion:hover {
+    background-color: #1177bb;
+  }
+
+#agregar-dispositivos {
+    background-color: #4bb4f8;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    padding: 2% 5%;
+    width: 716px;
+    cursor: pointer;
+  }
+  
+#agregar-dispositivos:hover {
+    background-color: #1177bb;
+  }
+
+#menu-principal {
+    background-color: #4bb4f8;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    padding: 2% 5%;
+    width: 716px;
+    cursor: pointer;
+  }
+  
+#menu-principal:hover {
+    background-color: #1177bb;
+  }
+
+
+#val-box {
+    background-color: #ffdddd;
+    border-left: 6px solid #f44336;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 750px;
+    margin: 2% auto;
+  }
+
+#val-box h2 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+  }
+
+#val-list {
+    padding-left: 20px;
+    margin: 0;
+    list-style-type: disc;
+    color: #a94442;
+  }
+
+
+
+  
+.grupo-input label {
+    font-weight: bold;
+    }
+  
+.grupo-input input {
+    padding-left: 5px; 
+    }
+
+#nombre {
+  max-width: 80ch;
+}
+
+#email{
+  max-width: 30ch;
+}
+
+#celular{
+  max-width: 15.5ch;
+}
+
+#dispositivo{
+  max-width: 80ch;
+}
+
+#años{
+  max-width: 3ch;
+}
