@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Agregar Donación</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/agregar-donacion.css') }}">
+</head>
+
+<body>
+
+    <div class="logo">
+        <p id="titulo-principal">Agrega tu donación</p>
+    </div>
+    <div class="main-container">
+        <div id="val-box" hidden>
+            <h2 id="val-msg"></h2>
+            <ul id="val-list"></ul>
+        </div>
+        <div class="container" id ="informacion-donante">
+            <div class="titulo">
+                <p id="titulo1">Información de Contacto</p>
+            </div>
+            <form class="formulario" id="informacion-contacto">
+                <div id="nombre-donante" class="grupo-input">
+                    <label for="nombre">Nombre Donante</label>
+                    <input id="nombre" name="nombre" size="80">
+                </div>
+
+                <div id="email-donante" class="grupo-input">
+                    <label for="email">Email Donante</label>
+                    <input id="email" name="email" size="30">
+                </div>
+                
+                <div id="celular-donante" class="grupo-input">
+                    <label for="celular">Número Celular Donante</label>
+                    <input id="celular" name="celular" size="15">
+                </div>
+                <div id="region-donante" class="grupo-input">
+                    <label for="region">Región</label>
+                    <select name="region" id="region">
+                        <option value="">Seleccione una región</option>
+                    </select>
+                </div>
+                <div id="comuna-donante" class="grupo-input">
+                    <label for="comuna">Comuna</label>
+                    <select name="comuna" id="comuna">
+                        <option value="">Seleccione una comuna</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div class="container" id ="informacion-producto">
+            <div class="titulo">
+                <p id="titulo2">Información dispositivo</p>
+            </div>
+            <form class="formulario" id="informacion-dispositivo">
+                <div id="nombre-dispositivo" class="grupo-input">
+                    <label for="dispositivo">Nombre dispositivo</label>
+                    <input id="dispositivo" name="dispositivo" size="80">
+                </div>
+                <div id="descripcion-dispositivo" class="grupo-input">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea>
+                </div>
+                <div id="tipo-dispositivo" class="grupo-input">
+                    <label for="tipo">Tipo</label>
+                    <select name="tipo" id="tipo">
+                        <option value="">Seleccione un tipo</option>
+                        <option value="Pantalla">Pantalla </option>
+                        <option value="notebook">Notebook </option>
+                        <option value="tablet">Tablet </option>
+                        <option value="celular"> Celular </option>
+                        <option value="consola"> Consola </option>
+                        <option value="mouse"> Mouse</option>
+                        <option value="teclado"> Teclado </option>
+                        <option value="impresora"> Impresora </option>
+                        <option value="parlante"> Parlante </option>
+                        <option value="audífonos"> Audífonos </option>
+                        <option value="Otro"> Otro </option>
+                    </select>
+                </div>
+                <div id="años-dispositivo" class="grupo-input">
+                    <label for="años">Años de uso</label>
+                    <input id="años" name="años" size="3">
+                </div>
+                <div id="estado-dispositivo" class="grupo-input">
+                    <label for="estado">Estado funcionamiento</label>
+                    <select name="estado" id="estado">
+                        <option value="">Seleccione un estado</option>
+                        <option value=" funciona-perfecto"> Funciona perfecto </option>
+                        <option value="funciona-a-medias">Funciona a medias </option>
+                        <option value="no-funciona">No funciona </option>
+                    </select>
+                </div>
+                <div id="imagen-dispositivo" class="grupo-input">
+                    <label for="image">Fotos de Productos</label>
+                    <input type="file" id="image" accept="image/*" multiple>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="opciones-menu">
+        <button type="button" id="publicar-donacion"> Publicar esta donación</button>
+        <button type="button" id="agregar-dispositivos"> Agregar otro dispositivo a esta donacion</button>
+        <button type="button" id="menu-principal" onclick="window.location.href='{{ url_for('index')}}'"> Volver al menu principal</button>
+    </div>
+
+
+    <script src="../static/javascript/agregar-donacion/agregar-donacion-clonar.js"></script>
+    <script src="../static/javascript/agregar-donacion/agregar-donacion-menu-desplegable.js"></script>
+    <script src="../static/javascript/agregar-donacion/agregar-donacion-validacion.js"></script>
+</body>
