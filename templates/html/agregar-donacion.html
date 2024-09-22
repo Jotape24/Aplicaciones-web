@@ -108,7 +108,9 @@
         <button type="button" id="menu-principal" onclick="window.location.href='{{ url_for('index')}}'"> Volver al menu principal</button>
     </div>
 
-
+    <script>
+        const menuUrl = "{{ url_for('index') }}";
+    </script>
     <script src="../static/javascript/agregar-donacion/agregar-donacion-clonar.js"></script>
     <script src="../static/javascript/agregar-donacion/agregar-donacion-menu-desplegable.js"></script>
     <script src="../static/javascript/agregar-donacion/agregar-donacion-validacion.js"></script>

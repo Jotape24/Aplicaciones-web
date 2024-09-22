@@ -273,7 +273,7 @@ const validarForm = () => {
     menuButton.innerText = "Ir al Menú Principal";
     menuButton.hidden = true;
     menuButton.addEventListener("click", () => {
-      window.location.href = "../html/index.html"; // Redirige al menú principal
+      window.location.href = menuUrl; // Redirige al menú principal
     });
 
     // Agregar botones para enviar el formulario o volver
