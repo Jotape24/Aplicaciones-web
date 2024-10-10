@@ -16,12 +16,14 @@
         <div class="logo">
             <p id="title">Dona o recibe dispositivos electronicos</p>
         </div>
+        {% block botones%}
         <form class="form" id="first-page">
             <div class="menu-options">
                 <button type="button" id="add-donation" onclick="window.location.href='{{ url_for('agregarDonacion')}}'">Agregar Donacion</button>
                 <button type="button" id="view-devices" onclick="window.location.href='{{ url_for('verDispositivos')}}'">Ver Dispositivos</button>
             </div>
         </form>
+        {% endblock botones%}
     </div>
 </body>
 </html>
