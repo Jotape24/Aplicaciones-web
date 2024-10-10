@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 from utils.validacion import validarDonante, validarDispositivo, validarForm
+from database import db
+
 
 app = Flask(__name__)
 

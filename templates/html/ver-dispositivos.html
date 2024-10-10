@@ -21,6 +21,20 @@
                 <th> Comuna</th>
                 <th> Fotos</th>
             </tr>
+
+            {% for dispositivos in dispositivo %}
+                <tr>
+                    <th> {{ dispositivos.tipo }} </th>
+                    <th> {{ dispositivos.nombre }} </th>
+                    <th> {{ dispositivos.estado }} </th>
+                    <th>{{ dispositivos.contacto.comuna.nombre }}</th>
+                    <th>
+                        {% for archivo in dispositivos.archivos %}
+                            <img src="{{ archivo.ruta_archivo }}" alt="{{ archivo.nombre_archivo }}" width="120" height="120">
+                        {% endfor %}
+                    </th>
+                </tr>
+            {% endfor %}
             
             
             <tr>
