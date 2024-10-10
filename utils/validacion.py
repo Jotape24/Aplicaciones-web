@@ -1,4 +1,5 @@
 import re 
+import filetype
 
 def validarNombreDonante(nombre):
     regex = r'^[a-zA-Z\s]+$'
