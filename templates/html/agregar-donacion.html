@@ -35,18 +35,30 @@
                     <label for="celular">Número Celular Donante</label>
                     <input id="celular" name="celular" size="15">
                 </div>
+
+
+
                 <div id="region-donante" class="grupo-input">
                     <label for="region">Región</label>
-                    <select name="region" id="region">
+                    <select name="region" id="region" onchange="cargarComunas()">
                         <option value="">Seleccione una región</option>
+                        {% for regiones in region %}
+                            <option value="{{ regiones.id }}">{{ regiones.nombre }}</option>
+                        {% endfor %}
                     </select>
                 </div>
+
+
+
                 <div id="comuna-donante" class="grupo-input">
                     <label for="comuna">Comuna</label>
                     <select name="comuna" id="comuna">
                         <option value="">Seleccione una comuna</option>
                     </select>
                 </div>
+
+
+
             </form>
         </div>
 
