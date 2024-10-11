@@ -4,10 +4,12 @@ import filetype
 def validarNombreDonante(nombre):
     regex = r'^[a-zA-Z\s]+$'
     trimmed = nombre.strip()
-    bool = (re.match(regex, nombre) and len(trimmed) >= 3 and len(trimmed <=80))
+    bool = (re.match(regex, nombre) and len(trimmed) >= 3 and len(trimmed) <=80)
     return bool
 
 def validarNumeroTelefonico(numero):
+    if not numero:
+        return True
     regex = r'^(\+56|56)?[ -]*(2|9)[ -]*([0-9][ -]*){8}'
     bool = (re.match(regex, numero) and len(numero) >= 8)
     return bool
@@ -19,7 +21,7 @@ def validarCorreo(correo):
 
 def validarNombreDispositivo(nombre):
     trimmed = nombre.strip()
-    bool = (len(trimmed) >= 3 and len(trimmed <=80))
+    bool = (len(trimmed) >= 3 and len(trimmed)<=80)
     return bool
 
 def validarAñosDeUso(años):

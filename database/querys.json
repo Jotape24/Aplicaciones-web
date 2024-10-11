@@ -7,5 +7,8 @@
     "obtener_siguientes":"SELECT id, contacto_id, nombre, descripcion, tipo, anos_uso, estado FROM dispositivo ORDER BY id DESC LIMIT 5, 5;",
     "no_name":"SELECT id, contacto_id, COM.nombre, nombre, descripcion, tipo, anos_uso, estado FROM dispositivo, contacto CO, comuna COM WHERE contacto_id=CO.id AND CO.comuna_id=COM.id ORDER BY id DESC LIMIT 5, 5;",
     "insertar_archivo":"INSERT INTO archivo (ruta_archivo, nombre_archivo, dispositivo_id) VALUES (%s,%s,%s);",
-    "obtener_archivos":"SELECT id, ruta_archivo, nombre_archivo FROM archivo WHERE dispositivo_id=%s"
+    "obtener_archivos":"SELECT id, ruta_archivo, nombre_archivo FROM archivo WHERE dispositivo_id=%s",
+
+    "obtener_regiones":"SELECT * FROM region",
+    "obtener_comuna_por_nombre":"SELECT id FROM comuna WHERE nombre=%s"
 }

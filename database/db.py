@@ -1,9 +1,9 @@
 import pymysql
 import json
 
-DB_NAME = "confessions_db"
-DB_USERNAME = "dbadmin"
-DB_PASSWORD = "dbadmin"
+DB_NAME = "tarea2"
+DB_USERNAME = "cc5002"
+DB_PASSWORD = "programacionweb"
 DB_HOST = "localhost"
 DB_PORT = 3306
 DB_CHARSET = "utf8"
@@ -30,8 +30,9 @@ def agregar_contacto(nombre, email, celular, comuna_id, fecha_creacion):
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["agregar_contacto"], (nombre, email, celular, comuna_id, fecha_creacion,))
-	user = cursor.fetchone()
-	return user
+	contacto_id = cursor.lastrowid
+	conn.commit()
+	return contacto_id
 
 def obtener_contactos_ordenados():
 	conn = get_conn()
@@ -44,8 +45,9 @@ def agregar_dispositivo(contacto_id, nombre, descripcion, tipo, anos_uso, estado
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["agregar_dispositivo"], (contacto_id, nombre, descripcion, tipo, anos_uso, estado,))
-	user = cursor.fetchone()
-	return user
+	conn.commit()
+	dispositivo_id = cursor.lastrowid
+	return dispositivo_id
 
 def obtener_dispositivos_con_contacto(contacto_id):
 	conn = get_conn()
@@ -76,6 +78,7 @@ def insertar_archivo(ruta_archivo, nombre_archivo, dispositivo_id):
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["insertar_archivo"], (ruta_archivo, nombre_archivo, dispositivo_id,))
+	conn.commit()
 	user_img = cursor.fetchone()
 	return user_img
 
@@ -84,9 +87,42 @@ def obtener_archivos(dispositivo_id ):
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_archivos"], (dispositivo_id, ))
 	conn.commit()
+
+def obtener_comuna_por_nombre(nombre ):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_comuna_por_nombre"], (nombre, ))
+	conn.commit()
+
+def obtener_comuna_por_nombre(nombre):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_comuna_por_nombre"], (nombre,))
+	comuna = cursor.fetchone()
+	return comuna
+
+def obtener_regiones():
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_regiones"], ())
+	regiones = cursor.fetchall()
+	print(regiones)
+	return regiones
+
+
+def obtener_comunas_por_region(region_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, nombre FROM comuna WHERE region_id = %s", (region_id,))
+    comunas = cursor.fetchall()
+    return [{"id": comuna[0], "nombre": comuna[1]} for comuna in comunas]
 	
 
 # -- db-related functions --
+
+def agregarUsuario(nombre, email, celular, region, comuna):
+	
+    return bool
 
 """""
 def register_user(username, password, email):

@@ -280,14 +280,22 @@ const validarForm = () => {
     let submitButton = document.createElement("button");
     submitButton.innerText = "Sí, confirmo";
     submitButton.style.marginRight = "10px";
+    submitButton.type = "submit";
+
     submitButton.addEventListener("click", () => {
-      // hacer que se vea el boton de regreso al menu
-      // cambiar el texto de val-box
-      submitButton.hidden = true;
-      backButton.hidden = true;
-      validationMessageElem.innerText = "Hemos recibido la información de su donación. Muchas gracias.";
-      menuButton.hidden = false;
+        // hacer que se vea el boton de regreso al menu
+        // cambiar el texto de val-box
+        submitButton.hidden = true;
+        backButton.hidden = true;
+        validationMessageElem.innerText = "Hemos recibido la información de su donación. Muchas gracias.";
+        menuButton.hidden = false;
+
+        const myForm = document.querySelector(".formulario");  // Asegúrate de seleccionar el formulario
+        myForm.submit();  // Enviar el formulario
+
     });
+
+
 
     let backButton = document.createElement("button");
     backButton.innerText = "No, quiero volver al formulario";
