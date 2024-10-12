@@ -13,67 +13,36 @@
     </div>
     <div class = "table">
         <table>
-            
             <tr>
-                <th> Tipo</th>
-                <th> Nombre Dispositivo</th>
-                <th> Estado</th>
-                <th> Comuna</th>
-                <th> Fotos</th>
+                <th>Tipo</th>
+                <th>Nombre Dispositivo</th>
+                <th>Estado</th>
+                <th>Comuna</th>
+                <th>Fotos</th>
             </tr>
-
-            {% for dispositivos in dispositivo %}
-                <tr>
-                    <th> {{ dispositivos.tipo }} </th>
-                    <th> {{ dispositivos.nombre }} </th>
-                    <th> {{ dispositivos.estado }} </th>
-                    <th>{{ dispositivos.contacto.comuna.nombre }}</th>
-                    <th>
-                        {% for archivo in dispositivos.archivos %}
-                            <img src="{{ archivo.ruta_archivo }}" alt="{{ archivo.nombre_archivo }}" width="120" height="120">
-                        {% endfor %}
-                    </th>
-                </tr>
+        
+            {% for dispositivo in data %}
+            <tr onclick="location.href='{{ url_for('informacionDispositivo', id=dispositivo.id) }}'" style="cursor: pointer;">
+                <td>{{ dispositivo.tipo }}</td>
+                <td>{{ dispositivo.nombreDispositivo }}</td>
+                <td>{{ dispositivo.estado }}</td>
+                <td>{{ dispositivo.comuna }}</td>
+                <td>
+                    {% for archivo in dispositivo.dirFotos %}
+                        <img src="{{ archivo }}" alt="Foto dispositivo" width="120" height="120">
+                    {% endfor %}
+                </td>
+            </tr>
             {% endfor %}
-            
-            
-            <tr>
-                <td><a href="informacion-dispositivo.html?dispositivo=gato">Otro</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=gato">Kiara</a> </td>
-                <td><a href="informacion-dispositivo.html?dispositivo=gato">Funciona a medias</a></td>
-                <td><a href="informacion-dispositivo.html?dispositivo=gato">Maipu</a></td>
-                <td><a href="informacion-dispositivo.html?dispositivo=gato"><img src="../static/imagenes/gato1.JPG" alt="Imagen de un gato" width="120" height="120"> </a></td>
-            </tr>
-            <tr>
-                <td> <a href="informacion-dispositivo.html?dispositivo=audifonos">Audífonos</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=audifonos">Audífonos bluetooth Philips tah4205</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=audifonos">Funciona perfecto</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=audifonos">Santiago</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=audifonos"><img src="../static/imagenes/audifonos.png" alt="Imagen de audifonos" width="120" height="120"> </a></td>
-            </tr>
-            <tr>
-                <td> <a href="informacion-dispositivo.html?dispositivo=3DS">Consola</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=3DS">Nintendo 3DS</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=3DS">Funciona a medias</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=3DS">Vilcun</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=3DS"><img src="../static/imagenes/3DS.png" alt="Imagen de nintendo 3DS" width="120" height="120"></a></td>
-            </tr>
-            <tr>
-                <td> <a href="informacion-dispositivo.html?dispositivo=notebook">Notebook</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=notebook">Asus tuf</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=notebook">No funciona</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=notebook">Calama</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=notebook"><img src="../static/imagenes/notebook.png" alt="Imagen de notebook" width="120" height="120"></a></td>
-            </tr>
-            <tr>
-                <td> <a href="informacion-dispositivo.html?dispositivo=switch">Consola</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=switch">Nintendo Switch</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=switch">Funciona a medias</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=switch">Melipilla</a></td>
-                <td> <a href="informacion-dispositivo.html?dispositivo=switch"><img src="../static/imagenes/switch.png" alt="Imagen de nintendo switch" width="120" height="120"></a></td>
-            </tr>
-            
         </table>
+        
+        <div class="pagination">
+            {% if page > 1 %}
+                <button type="button" id="ant" onclick="window.location.href='{{ url_for('verDispositivos', page=page-1) }}'"> Anterior</button>
+            {% endif %}
+            <button type="button" id="sgte" onclick="window.location.href='{{ url_for('verDispositivos', page=page+1) }}'"> Siguiente</button>
+        </div>
+
     </div>
     <div class="menu">
         <button type="button" id="main-menu" onclick="window.location.href='{{ url_for('index')}}'"> Volver al menu principal</button>

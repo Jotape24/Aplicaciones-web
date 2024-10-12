@@ -53,7 +53,9 @@ def obtener_dispositivos_con_contacto(contacto_id):
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_dispositivos_con_contacto"], (contacto_id,))
+	dispositivos = cursor.fetchall()
 	conn.commit()
+	return dispositivos
 
 def obtener_primeros_5_disp():
 	conn = get_conn()
@@ -68,11 +70,13 @@ def obtener_siguientes():
 	cursor.execute(QUERY_DICT["obtener_siguientes"], ())
 	conn.commit()
 
-def no_name( ):
+def obtener_dispositivos_con_comuna( ):
 	conn = get_conn()
 	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["no_name"], ( ))
+	cursor.execute(QUERY_DICT["obtener_dispositivos_con_comuna"], ( ))
 	conn.commit()
+	confessions = cursor.fetchall()
+	return confessions
 
 def insertar_archivo(ruta_archivo, nombre_archivo, dispositivo_id):
 	conn = get_conn()
@@ -86,13 +90,9 @@ def obtener_archivos(dispositivo_id ):
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_archivos"], (dispositivo_id, ))
+	archivos = cursor.fetchall()
 	conn.commit()
-
-def obtener_comuna_por_nombre(nombre ):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["obtener_comuna_por_nombre"], (nombre, ))
-	conn.commit()
+	return archivos
 
 def obtener_comuna_por_nombre(nombre):
 	conn = get_conn()
@@ -113,16 +113,73 @@ def obtener_regiones():
 def obtener_comunas_por_region(region_id):
     conn = get_conn()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, nombre FROM comuna WHERE region_id = %s", (region_id,))
+    cursor.execute(QUERY_DICT["obtener_comunas_por_region"], (region_id,))
     comunas = cursor.fetchall()
     return [{"id": comuna[0], "nombre": comuna[1]} for comuna in comunas]
+
+def obtener_comuna_por_contacto(contacto_id):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_comuna_por_contacto"], (contacto_id,))
+	comuna = cursor.fetchone()
+	conn.commit()
+	return comuna
+
+def obtener_fotos_por_dispositivo(dispositivo_id):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_fotos_por_dispositivo"], (dispositivo_id,))
+	fotos = cursor.fetchall()
+	conn.commit()
+	return fotos
+
+def obtener_dispositivos_paginados(offset, limit=5):
+    conn = get_conn()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT["obtener_dispositivos_con_paginacion"], (limit, offset))
+    dispositivos = cursor.fetchall()
+    conn.commit()
+    return dispositivos
+
+
+def obtener_donante_por_dispositivo(id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT["obtener_donante_por_dispositivo"], (id,))
+    dispositivos = cursor.fetchone()
+    conn.commit()
+    return dispositivos
+
+
+
+
+def obtener_dispositivo_por_id(id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT["obtener_dispositivo_por_id"], (id,))
+    dispositivos = cursor.fetchone()
+    conn.commit()
+    return dispositivos
+
+def obtener_comuna_por_id(comuna_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT["obtener_comunas_por_id"], (comuna_id,))
+    comuna = cursor.fetchone()
+    return comuna[0] if comuna else None
+
+def obtener_region_por_comuna_id(comuna_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT["obtener_regiones_id_comunas"], (comuna_id,))
+    region = cursor.fetchone()
+    return region[0] if region else None
+
 	
 
 # -- db-related functions --
 
-def agregarUsuario(nombre, email, celular, region, comuna):
-	
-    return bool
+
 
 """""
 def register_user(username, password, email):

@@ -5,10 +5,20 @@
     "obtener_dispositivos_con_contacto":"SELECT id, contacto_id, nombre, descripcion, tipo, anos_uso, estado FROM dispositivo WHERE contacto_id=%s;",
     "obtener_primeros_5_disp":"SELECT id, contacto_id, nombre, descripcion, tipo, anos_uso, estado FROM dispositivo ORDER BY id DESC LIMIT 0, 5;",
     "obtener_siguientes":"SELECT id, contacto_id, nombre, descripcion, tipo, anos_uso, estado FROM dispositivo ORDER BY id DESC LIMIT 5, 5;",
-    "no_name":"SELECT id, contacto_id, COM.nombre, nombre, descripcion, tipo, anos_uso, estado FROM dispositivo, contacto CO, comuna COM WHERE contacto_id=CO.id AND CO.comuna_id=COM.id ORDER BY id DESC LIMIT 5, 5;",
+    "obtener_dispositivos_con_comuna":"SELECT id, contacto_id, COM.nombre, nombre, descripcion, tipo, anos_uso, estado FROM dispositivo, contacto CO, comuna COM WHERE contacto_id=CO.id AND CO.comuna_id=COM.id ORDER BY id DESC LIMIT 5, 5;",
     "insertar_archivo":"INSERT INTO archivo (ruta_archivo, nombre_archivo, dispositivo_id) VALUES (%s,%s,%s);",
     "obtener_archivos":"SELECT id, ruta_archivo, nombre_archivo FROM archivo WHERE dispositivo_id=%s",
 
+    "obtener_comunas_por_region":"SELECT id, nombre FROM comuna WHERE region_id = %s",
     "obtener_regiones":"SELECT * FROM region",
-    "obtener_comuna_por_nombre":"SELECT id FROM comuna WHERE nombre=%s"
+    "obtener_comuna_por_nombre":"SELECT id FROM comuna WHERE nombre=%s",
+    "obtener_comuna_por_contacto": "SELECT c.nombre AS comuna FROM contacto co JOIN comuna c ON co.comuna_id = c.id WHERE co.id = %s;",
+    "obtener_fotos_por_dispositivo": "SELECT a.nombre_archivo FROM archivo a WHERE a.dispositivo_id = %s;",
+    "obtener_dispositivos_con_paginacion": "SELECT id, contacto_id, nombre, descripcion, tipo, anos_uso, estado FROM dispositivo ORDER BY id DESC LIMIT %s OFFSET %s;",
+
+    "obtener_dispositivo_por_id": "SELECT * FROM dispositivo WHERE id = %s;",
+    "obtener_donante_por_dispositivo": "SELECT d.nombre, d.email, d.celular AS celular, d.comuna_id FROM contacto AS d JOIN dispositivo AS disp ON d.id = disp.contacto_id WHERE disp.id = %s;",
+    "obtener_comunas_por_id":"SELECT nombre FROM comuna WHERE id = %s",
+    "obtener_regiones_id_comunas":"SELECT R.nombre FROM region R, comuna C WHERE R.id = C.region_id AND C.id = %s"
+
 }

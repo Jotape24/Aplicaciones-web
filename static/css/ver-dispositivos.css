@@ -81,4 +81,25 @@ a {
 a:hover {
     text-decoration: underline;
   }
+
+.pagination {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    margin: 20px 0; /* Margen superior e inferior */
+}
+
+.pagination button {
+  margin: 0 10px; 
+  color: #007bff; 
+  padding: 10px 15px; 
+  border: 1px solid #007bff; 
+  background-color: transparent;
+  cursor: pointer; 
+  transition: background-color 0.3s, color 0.3s; 
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: white; 
+}
   

@@ -80,13 +80,78 @@ def agregarDonacion() :
     regiones = obtener_regiones()
     return render_template("html/agregar-donacion.html", regiones=regiones)
 
-@app.route("/informacion-dispositivo")
-def informacionDispositivo():
-    return render_template("html/informacion-dispositivo.html")
+@app.route("/informacion-dispositivo/<int:id>")
+def informacionDispositivo(id):
+    
+    dispositivo = obtener_dispositivo_por_id(id)  
+    donante = obtener_donante_por_dispositivo(id) 
 
-@app.route("/ver-dispositivos")
+    if dispositivo is None:
+        return "Dispositivo no encontrado", 404  # Maneja el error de dispositivo no encontrado
+    
+    # Asegúrate de que donante no sea None antes de descomponerlo
+    if donante is None:
+        return "Donante no encontrado", 404
+    
+
+    id_dispositivo, _, nombreDispositivo, descripcion, tipo, años, estado = dispositivo
+    nombre, email, numero, comunaID = donante
+
+    fotos = obtener_fotos_por_dispositivo(id_dispositivo) 
+    comuna = obtener_comuna_por_id(comunaID)
+    region = obtener_region_por_comuna_id(comunaID)
+    print("1")
+    data = {
+        "nombre":nombre, 
+        "email":email,
+        "numero":numero,
+        "region":region,
+        "comuna":comuna,
+        "dispositivo":nombreDispositivo,
+        "descripcion":descripcion,
+        "tipo":tipo,
+        "años":años,
+        "estado":estado,
+        "fotos":fotos
+    }
+    print("2")
+    dir_fotos = [url_for('static', filename=f'uploads/{foto[0]}') for foto in fotos]
+    print("3")
+
+    
+    return render_template("html/informacion-dispositivo.html", data=data, dir_fotos=dir_fotos)
+
+@app.route("/ver-dispositivos", methods=["GET"])
 def verDispositivos():
-    return render_template("html/ver-dispositivos.html")
+
+    # Obtener el parámetro de página 
+    page = int(request.args.get('page', 1))
+    limit = 5
+    offset = (page - 1) * limit
+
+    dispositivos = obtener_dispositivos_paginados(offset, limit)
+
+    hay_siguiente = len(dispositivos) == limit
+
+    data = []
+    for disp in dispositivos:
+        id_dispositivo, id_donante, nombre, _, tipo, _, estado = disp
+        comuna = obtener_comuna_por_contacto(id_donante)[0]  # Acceder al nombre de la comuna
+        fotos = obtener_fotos_por_dispositivo(id_dispositivo)
+
+        # Construir la lista de URLs para las fotos
+        dir_fotos = [url_for('static', filename=f'uploads/{foto[0]}') for foto in fotos]
+
+        data.append({
+            "tipo": tipo,
+            "nombreDispositivo": nombre,
+            "estado": estado,
+            "comuna": comuna,
+            "dirFotos": dir_fotos,
+            "id": id_dispositivo
+        })
+
+    return render_template("html/ver-dispositivos.html", data=data, page=page, hay_siguiente=hay_siguiente)
 
 
 @app.route("/comunas/<int:region_id>")

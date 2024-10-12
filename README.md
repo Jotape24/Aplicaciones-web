@@ -4,34 +4,57 @@ Alumno: José Pablo Canales
 
 ## Organizacion de archivos
 
-Se organizo el proyecto diferenciando en 3 carpetas principales, las cuales cada una contiene archivos del tipo especificado, cada archivo tiene el nombre del archivo html que referencian. En el caso de los archivos JavaScript, se crearon subcarpetas para diferencias archivos JavaScript relacionados con cierto HTML, luego se crearon archivos JS para separar las distintas funciones que pueden tener para una misma pagina, con nombre de forma "nombreHTML-funcion.js". 
+El proyecto se organizo en base a las carpetas *database*, *static*, *templates* y *utils*, donde en database esta todo lo relacionado a la base de datos, en template se encuentran archivos css, js e imagenes, en templates se encuentran los archivos html y en utils un archivo de validación en python.
 
 A continuación se muestra una guia de navegación por el proyecto:
 
-    - css // se incluyen los archivos de tipo css
-        - agregar-donacion.css
-        - index.css
-        - informacion-dispositivos.css
-        - ver-dispositivos.css
-    - html // se incluyen los archivos de tipo html
-        - agregar-donacion.html
-        - index.html
-        - informacion-dispositivos.html
-        - ver-dispositivos.html
+    - database
+        - db.py
+        - querys.json
+        - region-comuna.sql
+        - sentencias.sql
+        - tarea2.sql
+
+    - static
+        - css // se incluyen los archivos de tipo css
+            - agregar-donacion.css
+            - index.css
+            - informacion-dispositivos.css
+            - ver-dispositivos.css
+    - imagenes // imagenes de la tarea 1
     - javascript // se incluyen los archivos de tipo javascript
         - agregar-donacion
             - agregar-donacion-clonar.js
-            - agregar-donacion-menu-desplegable.js
             - agregar-donacion-validacion.js
+            - cargar-comunas.js
         - informacion-dispositivos
             - informacion-dispositivo-agrandar-imagen.js
             - informacion-dispositivo-validar-comm.js
             - informacion-dispositivos-mostrar-correcto.js
+        - redirect.js
+    - uploads // carpeta a donde van las imagenes subidas
+
+    - templates
+        - html // se incluyen los archivos de tipo html
+            - agregar-donacion.html
+            - index.html
+            - informacion-dispositivos.html
+            - ver-dispositivos.html
+    - utils
+        - validacion.py
+    - app.py
 
 
 ## Decisiones  de diseño
 
 En esta sección se hablara sobre las desiciones tomadas en el diseño de cada pestaña.
+
+## General
+
+Para toda la tarea tuve que crear consultas adicionales a las entregadas para la tarea, estas se encuentran en el archivo json y fueron implementadas a python en el archivo db.py para luego ser ocupadas en las distintas rutas de la app.
+
+Fue muy util usar diccionarios en app.py para luego poder acceder a caracteristicas deseadas en cada template.
+
 
 ### Index
 
@@ -39,15 +62,13 @@ Cumple el rol de menú principal en la pagina, este contiene los botones princip
 
 ### Agregar donación
 
-En esta pestaña se realiza una validación de los formularios, mostrando mensajes distintos en caso que este sea correcto o no. Ademas es posible agregar formularios de dispositivos adicionales, aunque de momento no supe como implementar la validación de estos ultimos.
+En esta sección se trabajo un POST de información a la base de datos y se implemento que los campos region y comuna se poblen basados en la base de datos, region se poblo con un if de jinja y comuna en el archivo cargar-comunas.js.
 
 ### Ver dispositivos
 
-En esta pestaña se decidio mostrar los dispositivos donados de una forma en particular y se le asigno a todos los elementos un hipervinculo para que se muestre la información deseada en la pestaña *Información dispositivos*
+Ahora las filas son clickables y envian a una pagina Informacion dispositivos para cada una. Se logro recuperar de la base de datos los dispositivos donados para luego se mostrados en pantalla, implementando ademas un boton para avanzar en los dispositivos mostrados, aunque no supe como eliminarlo cuando no quedaban elementos por mostrar. Para la correcta funcionalidad de esto tuve que crear una nueva consulta de base de datos llamada "obtener_dispositivos_paginados" para poder avanzar en la db.
 
 ### Información dispositivos
 
-En esta pestaña me entere tarde que tenia que mostrar lo mismo para todos los hipervinculos de la pestaña *Ver dispositivos*, por lo que utilice atributos hidden e hipervinculos de forma *informacion-dispositivo.html?dispositivo=id*, donde mediante un script javascript, que revela solo la información pedida.
-
-Para el formulario de comentarios ya me habia enterado que se tenia que mostrar lo mismo siempre por lo que implemente uno solo para todos los dispositivos, este si atributo hidden.
+Esta pestaña depende enteramente de "Ver dispositivos", en la pestaña anterior el hipervinculo genera un id que va a mostrar la información necesaria en esta.
 

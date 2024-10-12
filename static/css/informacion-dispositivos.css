@@ -200,3 +200,8 @@ form textarea {
   font-weight: bold;
   cursor: pointer;
 }
+
+#imagen-dispositivo .img {
+  display: block;
+  margin-bottom: 10px; /* Espacio entre cada imagen */
+}
