@@ -72,11 +72,25 @@ def agregarDonacion() :
                 # guardar
                 img.save(os.path.join(app.config["UPLOAD_FOLDER"], img_filename))
                 arch = insertar_archivo("UPLOAD_FOLDER", img_filename, disp)
-
-            msg = "Donación exitosa"
+                return '''
+                <html>
+                    <head>
+                        <title>Donación Exitosa</title>
+                        <script type="text/javascript">
+                            setTimeout(function() {
+                                window.location.href = '/';
+                            }, 10000); // 10 segundos
+                        </script>
+                    </head>
+                    <body>
+                        <h1>¡Donación exitosa!</h1>
+                        <p>Serás redirigido al menú principal en 10 segundos.</p>
+                    </body>
+                </html>
+            '''
+        else: 
+            msg = "Error al ingresar contacto"
             return msg
-        msg = "Error al ingresar contacto"
-        return msg
     regiones = obtener_regiones()
     return render_template("html/agregar-donacion.html", regiones=regiones)
 
@@ -87,9 +101,8 @@ def informacionDispositivo(id):
     donante = obtener_donante_por_dispositivo(id) 
 
     if dispositivo is None:
-        return "Dispositivo no encontrado", 404  # Maneja el error de dispositivo no encontrado
+        return "Dispositivo no encontrado", 404 
     
-    # Asegúrate de que donante no sea None antes de descomponerlo
     if donante is None:
         return "Donante no encontrado", 404
     
@@ -124,7 +137,7 @@ def informacionDispositivo(id):
 @app.route("/ver-dispositivos", methods=["GET"])
 def verDispositivos():
 
-    # Obtener el parámetro de página 
+    # parametro de pagina 
     page = int(request.args.get('page', 1))
     limit = 5
     offset = (page - 1) * limit
@@ -136,10 +149,10 @@ def verDispositivos():
     data = []
     for disp in dispositivos:
         id_dispositivo, id_donante, nombre, _, tipo, _, estado = disp
-        comuna = obtener_comuna_por_contacto(id_donante)[0]  # Acceder al nombre de la comuna
+        comuna = obtener_comuna_por_contacto(id_donante)[0]  
         fotos = obtener_fotos_por_dispositivo(id_dispositivo)
 
-        # Construir la lista de URLs para las fotos
+        # lista de URLs
         dir_fotos = [url_for('static', filename=f'uploads/{foto[0]}') for foto in fotos]
 
         data.append({
@@ -156,6 +169,6 @@ def verDispositivos():
 
 @app.route("/comunas/<int:region_id>")
 def obtener_comunas(region_id):
-    # Asumiendo que tienes una función que obtiene las comunas por región
-    comunas = obtener_comunas_por_region(region_id)  # Asegúrate de que esta función esté implementada
+    
+    comunas = obtener_comunas_por_region(region_id)  
     return jsonify(comunas)

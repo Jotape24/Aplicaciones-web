@@ -174,31 +174,3 @@ def obtener_region_por_comuna_id(comuna_id):
     cursor.execute(QUERY_DICT["obtener_regiones_id_comunas"], (comuna_id,))
     region = cursor.fetchone()
     return region[0] if region else None
-
-	
-
-# -- db-related functions --
-
-
-
-"""""
-def register_user(username, password, email):
-	# 1. check the email is not in use
-	_email_user = get_user_by_email(email)
-	if _email_user is not None:
-		return False, "El correo ya esta en uso."
-	# 2. check the username is not in use
-	_username_user = get_user_by_username(username)
-	if _username_user is not None:
-		return False, "El nombre de usuario esta en uso."
-	# 3. create user
-	create_user(username, password, email)
-	return True, None
-
-def login_user(username, password):
-	a_user = get_user_by_username(username)
-	if a_user is None or a_user[3] != password:
-		return False, "Usuario o contraseña incorrectos."
-	return True, None
-
-"""""

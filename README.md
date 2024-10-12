@@ -62,7 +62,7 @@ Cumple el rol de menú principal en la pagina, este contiene los botones princip
 
 ### Agregar donación
 
-En esta sección se trabajo un POST de información a la base de datos y se implemento que los campos region y comuna se poblen basados en la base de datos, region se poblo con un if de jinja y comuna en el archivo cargar-comunas.js.
+En esta sección se trabajo un POST de información a la base de datos y se implemento que los campos region y comuna se poblen basados en la base de datos, region se poblo con un if de jinja y comuna en el archivo cargar-comunas.js. El retorno de una donación exitosa es una pagina que usando js hace que luego de un tiempo determinado redirige al menu principal.
 
 ### Ver dispositivos
 
