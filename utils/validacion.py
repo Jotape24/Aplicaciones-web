@@ -64,3 +64,16 @@ def validarDispositivo(nombre, años, imgs):
 
 def validarForm(nombreDonante, numero, correo, nombreDispositivo, años, imgs):
     return validarDonante(nombreDonante, numero, correo) and validarDispositivo(nombreDispositivo, años, imgs)
+
+
+
+# validaciones comentarios
+
+def validarTextoComm(texto):
+    bool = True
+    if (len(texto) < 5):
+        bool = False
+    return bool
+
+def validarComentario(nombre, texto):
+    return validarNombreDonante(nombre) and validarTextoComm(texto)

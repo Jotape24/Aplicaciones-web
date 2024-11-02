@@ -51,9 +51,11 @@ En esta sección se hablara sobre las desiciones tomadas en el diseño de cada p
 
 ## General
 
-Para toda la tarea tuve que crear consultas adicionales a las entregadas para la tarea, estas se encuentran en el archivo json y fueron implementadas a python en el archivo db.py para luego ser ocupadas en las distintas rutas de la app.
+Para toda la tarea tuve que crear consultas adicionales a las entregadas para la tarea, estas se encuentran en el archivo json y fueron implementadas a python en el archivo db.py para luego ser ocupadas en las distintas rutas de la app. 
 
 Fue muy util usar diccionarios en app.py para luego poder acceder a caracteristicas deseadas en cada template.
+
+Para la carga de las comunas recibi ayuda, ya que las necesitaba para lograr probar el resto del programa, escribo esto para que no tengan en cuenta esa funcionalidad al momento de revisar.
 
 
 ### Index

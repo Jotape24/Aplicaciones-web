@@ -76,51 +76,35 @@
     <div class="container">
         <div class="com-form">
             <h1>Agrega un comentario</h1>
-            <form id="com-form" method="post">
+            <form id="com-form" method="POST" enctype="multipart/form-data" action="/informacion-dispositivo/{{ data.dispositivo_id }}">
                 <div>
                     <label for="com-text-area-name">Nombre: </label>
-                    <input name="nombre" id="com-text-area-name" size="80">
+                    <input name="com-text-area-name" id="com-text-area-name" size="80">
                 </div>
                 <div>
                     <label for="com-text-area">Comentario: </label>
-                    <textarea name="comentario" id="com-text-area" cols="50" rows="4"></textarea>
+                    <textarea name="com-text-area" id="com-text-area" cols="50" rows="4"></textarea>
                 </div>
                 <div id="val-box" hidden>
                     <h2 id="val-msg">mensaje</h2>
                     <ul id="val-list"></ul>
                 </div>
-                <button type="button" id="submit-com-btn">Enviar</button>
+                <button type="submit" id="submit-com-btn">Enviar</button>
             </form>
 
         </div>
         <div class="com-list">
             <h1>Comentarios</h1>
             <div class="com-container">
-                <div class="com-fecha">
-                    <p>21/02/24</p>
-                </div>
-                <div class="com-author">
-                    <p>Juan</p>
-                </div>
-                <p>Juan querer gato para el, si juan tener gato, juan feliz, si juan no tener gato, juan muy triste.</p>
-            </div>
-            <div class="com-container">
-                <div class="com-fecha">
-                    <p>17/02/24</p>
-                </div>
-                <div class="com-author">
-                    <p>Juanin</p>
-                </div>
-                <p>Que buen producto.</p>
-            </div>
-            <div class="com-container">
-                <div class="com-fecha">
-                    <p>30/01/24</p>
-                </div>
-                <div class="com-author">
-                    <p>Juanita</p>
-                </div>
-                <p>Hola soy juanita.</p>
+                {% for comm in data2 %}
+                    <div class="com-fecha">
+                        <p>{{ comm.fecha }}</p>
+                    </div>
+                    <div class="com-author">
+                        <p>{{ comm.nombre }}</p>
+                    </div>
+                    <p>{{ comm.texto }}</p>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -135,8 +119,8 @@
         <img class="modal-content" id="modalImage" alt="Imagen grande" src="../imagenes/switch.png"> 
     </div>
 
-    <script src="../javascript/informacion-dispositivo/informacion-dispositivo-agrandar-imagen.js"></script>
-    <script src="../javascript/informacion-dispositivo/informacion-dispositivos-mostrar-correcto.js"></script>
-    <script src="../javascript/informacion-dispositivo/informacion-dispositivo-validar-comm.js"></script>
+    <script src="../static/javascript/informacion-dispositivo/informacion-dispositivo-agrandar-imagen.js"></script>
+    <script src="../static/javascript/informacion-dispositivo/informacion-dispositivos-mostrar-correcto.js"></script>
+    <!-- <script src="../static/javascript/informacion-dispositivo/informacion-dispositivo-validar-comm.js"></script> -->
 </body>
 </html>

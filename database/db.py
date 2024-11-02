@@ -174,3 +174,19 @@ def obtener_region_por_comuna_id(comuna_id):
     cursor.execute(QUERY_DICT["obtener_regiones_id_comunas"], (comuna_id,))
     region = cursor.fetchone()
     return region[0] if region else None
+
+
+def obtener_comentario(dispositivo_id):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_comentario"], (dispositivo_id,))
+	comentarios = cursor.fetchall()
+	return comentarios
+
+def insertar_comentario(nombre, texto, fecha, dispositivo_id):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["insertar_comentario"], (nombre, texto, fecha, dispositivo_id,))
+	comentario_id = cursor.lastrowid
+	conn.commit()
+	return comentario_id

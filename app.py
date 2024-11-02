@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, jsonify
-from utils.validacion import validarDonante, validarDispositivo, validarForm
+from utils.validacion import validarDonante, validarDispositivo, validarComentario
 from database.db import *
 from datetime import datetime
 from werkzeug.utils import secure_filename
@@ -25,6 +25,7 @@ def index():
 @app.route("/agregar-donacion", methods=["GET", "POST"])
 def agregarDonacion() :
     if request.method == "POST":
+        print(request.form)
         # usuario
         nombre = request.form.get("nombre")
         email = request.form.get("email")
@@ -72,29 +73,14 @@ def agregarDonacion() :
                 # guardar
                 img.save(os.path.join(app.config["UPLOAD_FOLDER"], img_filename))
                 arch = insertar_archivo("UPLOAD_FOLDER", img_filename, disp)
-                return '''
-                <html>
-                    <head>
-                        <title>Donación Exitosa</title>
-                        <script type="text/javascript">
-                            setTimeout(function() {
-                                window.location.href = '/';
-                            }, 10000); // 10 segundos
-                        </script>
-                    </head>
-                    <body>
-                        <h1>¡Donación exitosa!</h1>
-                        <p>Serás redirigido al menú principal en 10 segundos.</p>
-                    </body>
-                </html>
-            '''
+            
         else: 
             msg = "Error al ingresar contacto"
             return msg
     regiones = obtener_regiones()
     return render_template("html/agregar-donacion.html", regiones=regiones)
 
-@app.route("/informacion-dispositivo/<int:id>")
+@app.route("/informacion-dispositivo/<int:id>", methods=["GET", "POST"])
 def informacionDispositivo(id):
     
     dispositivo = obtener_dispositivo_por_id(id)  
@@ -106,6 +92,7 @@ def informacionDispositivo(id):
     if donante is None:
         return "Donante no encontrado", 404
     
+    # mostrar info
 
     id_dispositivo, _, nombreDispositivo, descripcion, tipo, años, estado = dispositivo
     nombre, email, numero, comunaID = donante
@@ -121,6 +108,7 @@ def informacionDispositivo(id):
         "region":region,
         "comuna":comuna,
         "dispositivo":nombreDispositivo,
+        "dispositivo_id": id_dispositivo,
         "descripcion":descripcion,
         "tipo":tipo,
         "años":años,
@@ -131,8 +119,35 @@ def informacionDispositivo(id):
     dir_fotos = [url_for('static', filename=f'uploads/{foto[0]}') for foto in fotos]
     print("3")
 
+    # mostrar comentarios
+    comentarios = obtener_comentario(id_dispositivo)
+    data2 = []
+    for comm in comentarios:
+        nombre, texto, fecha = comm
+        data2.append({
+            "nombre":nombre,
+            "texto":texto,
+            "fecha": fecha
+        })
+
+    # agregar comentarios
+
+    if request.method == "POST":
+        print(request.form)
+        nombre_form = request.form.get("com-text-area-name")
+        comentario_form = request.form.get("com-text-area")
+        fecha = datetime.now()
+        print(f"Nombre: {nombre_form}, Comentario: {comentario_form}, Fecha: {fecha} se tienen los valores")
+        if validarComentario(nombre_form, comentario_form):
+            print(f"Nombre: {nombre_form}, Comentario: {comentario_form}, Fecha: {fecha} se valido")
+            insertar_comentario(nombre_form, comentario_form, fecha, id_dispositivo)
+            
+            return redirect(url_for('informacionDispositivo', id=id))
+        
+
+        
     
-    return render_template("html/informacion-dispositivo.html", data=data, dir_fotos=dir_fotos)
+    return render_template("html/informacion-dispositivo.html", data=data, dir_fotos=dir_fotos, data2=data2)
 
 @app.route("/ver-dispositivos", methods=["GET"])
 def verDispositivos():

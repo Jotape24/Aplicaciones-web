@@ -19,6 +19,9 @@
     "obtener_dispositivo_por_id": "SELECT * FROM dispositivo WHERE id = %s;",
     "obtener_donante_por_dispositivo": "SELECT d.nombre, d.email, d.celular AS celular, d.comuna_id FROM contacto AS d JOIN dispositivo AS disp ON d.id = disp.contacto_id WHERE disp.id = %s;",
     "obtener_comunas_por_id":"SELECT nombre FROM comuna WHERE id = %s",
-    "obtener_regiones_id_comunas":"SELECT R.nombre FROM region R, comuna C WHERE R.id = C.region_id AND C.id = %s"
+    "obtener_regiones_id_comunas":"SELECT R.nombre FROM region R, comuna C WHERE R.id = C.region_id AND C.id = %s",
 
+
+    "obtener_comentario":"SELECT nombre, texto, fecha FROM comentario WHERE dispositivo_id = %s",
+    "insertar_comentario":"INSERT INTO comentario (nombre, texto, fecha, dispositivo_id) VALUES (%s, %s, %s, %s)"
 }
