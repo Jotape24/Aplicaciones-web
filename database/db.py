@@ -190,3 +190,24 @@ def insertar_comentario(nombre, texto, fecha, dispositivo_id):
 	comentario_id = cursor.lastrowid
 	conn.commit()
 	return comentario_id
+
+def comuna_y_cantidad():
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["comuna_y_cantidad"], ())
+	resultados = cursor.fetchall()
+	data = []
+	for resultado in resultados:
+		data.append({"comuna": resultado[0], "cantidad_contactos": resultado[1]})
+	return data
+
+
+def tipos_y_cantidad():
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["tipos_y_cantidad"], ())
+	resultados = cursor.fetchall()
+	data = []
+	for resultado in resultados:
+		data.append({"tipo": resultado[0], "cantidad_dispositivos": resultado[1]})
+	return data

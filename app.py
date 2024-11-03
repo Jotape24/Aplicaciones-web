@@ -187,3 +187,23 @@ def obtener_comunas(region_id):
     
     comunas = obtener_comunas_por_region(region_id)  
     return jsonify(comunas)
+
+
+@app.route("/grafico-contactos", methods=["GET"])
+def graficoContacto():
+    return render_template("html/grafico-contactos.html")
+
+@app.route("/grafico-dispositivos", methods=["GET"])
+def graficoDispositivos():
+    return render_template("html/grafico-dispositivos.html")
+
+
+@app.route("/get-contactos-data", methods=["GET"])
+def getContactosData():
+    data = comuna_y_cantidad()
+    return jsonify(data)
+
+@app.route("/get-dispositivos-data", methods=["GET"])
+def getDispositivosData():
+    data = tipos_y_cantidad()
+    return jsonify(data)

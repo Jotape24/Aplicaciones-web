@@ -23,5 +23,8 @@
 
 
     "obtener_comentario":"SELECT nombre, texto, fecha FROM comentario WHERE dispositivo_id = %s",
-    "insertar_comentario":"INSERT INTO comentario (nombre, texto, fecha, dispositivo_id) VALUES (%s, %s, %s, %s)"
+    "insertar_comentario":"INSERT INTO comentario (nombre, texto, fecha, dispositivo_id) VALUES (%s, %s, %s, %s)",
+
+    "comuna_y_cantidad":"SELECT comuna.nombre AS comuna, COUNT(contacto.id) AS cantidad_contactos FROM contacto JOIN comuna ON contacto.comuna_id = comuna.id GROUP BY comuna.nombre;",
+    "tipos_y_cantidad":"SELECT tipo, COUNT(id) AS cantidad FROM dispositivo GROUP BY tipo"
 }
