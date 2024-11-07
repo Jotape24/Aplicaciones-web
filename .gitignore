@@ -1,6 +1,8 @@
-T2-venv/
 T3-venv/
 __pycache__/
 *.pyc
 .vscode/
 Enunciado T2.pdf
+.vs/ 
+uploads/*
+!uploads/.gitkeep
