@@ -18,6 +18,7 @@ A continuación se muestra una guia de navegación por el proyecto:
     - static
         - css // se incluyen los archivos de tipo css
             - agregar-donacion.css
+            - graficos.css
             - index.css
             - informacion-dispositivos.css
             - ver-dispositivos.css
@@ -27,6 +28,9 @@ A continuación se muestra una guia de navegación por el proyecto:
             - agregar-donacion-clonar.js
             - agregar-donacion-validacion.js
             - cargar-comunas.js
+        - graficos
+            - grafico-contactos.js
+            - grafico-dispositivos-js
         - informacion-dispositivos
             - informacion-dispositivo-agrandar-imagen.js
             - informacion-dispositivo-validar-comm.js
@@ -37,6 +41,8 @@ A continuación se muestra una guia de navegación por el proyecto:
     - templates
         - html // se incluyen los archivos de tipo html
             - agregar-donacion.html
+            - grafico-contactos.html
+            - grafico-dispositivos.html
             - index.html
             - informacion-dispositivos.html
             - ver-dispositivos.html
@@ -49,28 +55,14 @@ A continuación se muestra una guia de navegación por el proyecto:
 
 En esta sección se hablara sobre las desiciones tomadas en el diseño de cada pestaña.
 
-## General
+### General
 
-Para toda la tarea tuve que crear consultas adicionales a las entregadas para la tarea, estas se encuentran en el archivo json y fueron implementadas a python en el archivo db.py para luego ser ocupadas en las distintas rutas de la app. 
-
-Fue muy util usar diccionarios en app.py para luego poder acceder a caracteristicas deseadas en cada template.
-
-Para la carga de las comunas recibi ayuda, ya que las necesitaba para lograr probar el resto del programa, escribo esto para que no tengan en cuenta esa funcionalidad al momento de revisar.
-
-
-### Index
-
-Cumple el rol de menú principal en la pagina, este contiene los botones principales para navegar por esta, con un estilo basado en lo visto en clases auxiliares.
-
-### Agregar donación
-
-En esta sección se trabajo un POST de información a la base de datos y se implemento que los campos region y comuna se poblen basados en la base de datos, region se poblo con un if de jinja y comuna en el archivo cargar-comunas.js. El retorno de una donación exitosa es una pagina que usando js hace que luego de un tiempo determinado redirige al menu principal.
-
-### Ver dispositivos
-
-Ahora las filas son clickables y envian a una pagina Informacion dispositivos para cada una. Se logro recuperar de la base de datos los dispositivos donados para luego se mostrados en pantalla, implementando ademas un boton para avanzar en los dispositivos mostrados, aunque no supe como eliminarlo cuando no quedaban elementos por mostrar. Para la correcta funcionalidad de esto tuve que crear una nueva consulta de base de datos llamada "obtener_dispositivos_paginados" para poder avanzar en la db.
+Ambas pestañas de graficos se realizaron de forma similar, se uso highcharts para generar el grafico y fetch para llenarlo con la información correcta desde la base de datos, eso se ve el los archivos js dentro de la carpeta static/javascript/graficos.
 
 ### Información dispositivos
 
-Esta pestaña depende enteramente de "Ver dispositivos", en la pestaña anterior el hipervinculo genera un id que va a mostrar la información necesaria en esta.
+En esta pestaña ocurrieron modificaciones, ahora el formulario es funcional, este tiene un boton que llama al archivo js informacion-dispositivo-validar-comm, cuando ya esta validado el formulario, se hace el submit para revisarlo en app.py y agregarlo a la base de datos.
+
+Para mostrar los comentarios adecuados en la base de datos se agrego una variable data2 en app.py para luego llamarla desde el template y asi seleccionarl la información correcta, esto usando una consulta de base de datos implementada en db.py.
+
 

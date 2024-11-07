@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/graficos.css') }}">
     <title>Document</title>
 </head>
     <body>
@@ -14,6 +15,9 @@
             </figure>
         </div>
 
+        <div class="button-1">
+            <button type="button" id="menu" onclick="window.location.href='{{ url_for('index')}}'"> Volver al menu principal</button>
+        </div>
 
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="{{url_for('static', filename='javascript/graficos/grafico-contactos.js')}}"></script>

@@ -27,6 +27,9 @@ const agregarComentario = () => {
         return;
     }
     else {
+        let commForm = document.getElementById("com-form");
+        commForm.submit();
+
         validationBox.innerText = "Se ha agregado tu comentario!";
         // aplicar estilos de aceptación
         validationBox.style.backgroundColor = "#ddffdd";
@@ -34,29 +37,32 @@ const agregarComentario = () => {
 
         // hacer visible el mensaje de validación
         validationBox.hidden = false;
+
+        
+
     }
 
     // se crea el comentario
-    const container = document.createElement("div");
-    container.className = "com-container";
+    // const container = document.createElement("div");
+    // container.className = "com-container";
 
-    const comAuthor = document.createElement("div");
-    comAuthor.className = "com-author";
-    const userNameParagraph = document.createElement("p");
-    userNameParagraph.innerText = name;
-    comAuthor.appendChild(userNameParagraph);
+    //const comAuthor = document.createElement("div");
+    //comAuthor.className = "com-author";
+    //const userNameParagraph = document.createElement("p");
+    //userNameParagraph.innerText = name;
+    //comAuthor.appendChild(userNameParagraph);
 
-    const commentText = document.createElement("p");
-    commentText.innerText = comText;
+    //const commentText = document.createElement("p");
+    //commentText.innerText = comText;
 
-    container.appendChild(comAuthor);
-    container.appendChild(commentText);
+    //container.appendChild(comAuthor);
+    //container.appendChild(commentText);
 
-    const comList = document.querySelector(".com-list");
-    comList.appendChild(container);
+    //const comList = document.querySelector(".com-list");
+    //comList.appendChild(container);
 
-    comTextArea.value = "";
-    comTextAreaName.value = "";
+    //comTextArea.value = "";
+    //comTextAreaName.value = "";
 };
 
 const submitBtn = document.getElementById("submit-com-btn");

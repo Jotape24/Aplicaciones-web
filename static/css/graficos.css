@@ -1,0 +1,17 @@
+#menu {
+    background-color: #4bb4f8;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    padding: 2% 5%;
+    width: 100%;
+    cursor: pointer;
+    width: 700px;
+    margin: 0 auto; 
+    display: block;
+  }
+  
+  #menu:hover {
+    background-color: #1177bb;
+  }
